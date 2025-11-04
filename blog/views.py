@@ -47,7 +47,7 @@ def starting_page(request:HttpRequest)->HttpResponse :
     context:Dict[str, List[Blog]] = {'blogs' : get_latest_blogs()}
     return render(request , 'blog/index.html' , context)
 def blogs(request:HttpRequest)->HttpResponse :
-    context:Dict[str, List[Blog]] = {'blog' : BLOGS}
+    context:Dict[str, List[Blog]] = {'blogs' : BLOGS}
     return render(request, 'blog/all-blogs.html' , context)
 def blog_detail(request:HttpRequest , slug:str)->HttpResponse :
     blog:Blog|None = find_blog_by_slug(slug)

@@ -1,5 +1,18 @@
 {% extends 'layout.html'%}
-<template></template>
+</>
 {% block title %} Blog {% endblock %}
-<template></template>
-{% block content %} Blog Details {% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-12">
+  <div class="max-w-3xl mx-auto px-4">
+    <article class="bg-white rounded-2xl shadow p-8">
+      <h1 class="text-4xl font-bold text-gray-800 mb-4">
+        {{ blog.title }}
+      </h1>
+      <p class="text-gray-600 text-lg leading-relaxed">
+        {{ blog.excerpt }}
+      </p>
+    </article>
+  </div>
+</div>
+{% endblock %}
