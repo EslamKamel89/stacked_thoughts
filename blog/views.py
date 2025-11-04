@@ -54,7 +54,7 @@ def blog_detail(request:HttpRequest , slug:str)->HttpResponse :
     if blog is None :
         raise Http404('Page not found')
     context:Dict[str, Blog] = {'blog':blog}
-    return render(request , 'blog/blog-detail.html' , context)
+    return render(request , 'blog/blog-details.html' , context)
 
 
 
