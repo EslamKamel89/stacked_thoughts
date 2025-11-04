@@ -39,7 +39,7 @@ def get_latest_blogs(n:int = 3) ->List[Blog] :
 
 def find_blog_by_slug(slug:str)->Blog|None:
     for blog in BLOGS :
-        if blog["slug"] == slug :
+        if blog['slug'] == slug :
             return blog
     return None
 
