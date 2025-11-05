@@ -1,14 +1,18 @@
 {% extends 'layout.html' %}
-</>
+<!-- prettier-ignore -->
 {% load static %}
-</>
+
+<!-- prettier-ignore -->
 {% block title %}Blogs{% endblock %}
-</>
-{% block css %} <link rel="stylesheet" href="{% static 'blog/main.css' %}"> {% endblock %}
-</>
+
+<!-- prettier-ignore -->
+{% block css %}
+<link rel="stylesheet" href="{% static 'blog/main.css' %}" />
+<!-- prettier-ignore -->
+{% endblock %}
+
+<!-- prettier-ignore -->
 {% block content %}
-
-
 
 <div class="min-h-screen bg-gray-50 py-10">
   <div class="max-w-3xl mx-auto px-4">
@@ -18,9 +22,7 @@
 
     <ul class="space-y-6">
       {% for blog in blogs %}
-      <li>
-        {% include 'blog/includes/blog.html'%}
-      </li>
+      <li>{% include 'blog/includes/blog.html'%}</li>
       {% empty %}
       <li class="text-center text-gray-500 bg-white rounded-xl py-10 shadow">
         No blogs yet.
