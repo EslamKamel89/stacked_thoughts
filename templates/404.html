@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+<!-- prettier-ignore -->
+{% block title%} Page not found {% endblock %}
+{% block content %}
+<div class="bg-gray-50 flex items-center justify-center min-h-screen px-6">
+  <div class="text-center max-w-md">
+    <h1 class="text-7xl font-extrabold text-blue-600 mb-4">404</h1>
+    <h2 class="text-2xl font-semibold text-gray-800 mb-2">
+      Oops! Page Not Found
+    </h2>
+    <p class="text-gray-600 mb-6 leading-relaxed">
+      The page you're looking for doesn’t exist, was moved, or never existed.
+    </p>
+    <div class="flex items-center justify-center gap-3">
+      <a
+        href="/"
+        class="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+      >
+        Back to Home
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
