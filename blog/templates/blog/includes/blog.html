@@ -1,11 +1,42 @@
-<article
-  class="bg-white rounded-2xl shadow hover:shadow-lg transition-shadow duration-300 p-6"
+{% load static %}
+<div
+  class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 w-full mx-auto"
 >
-  <a
-    href="{% url 'blog_detail' blog.slug %}"
-    class="block text-2xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-200"
-  >
-    {{ blog.title }}
+  <a href="{% url 'blog_detail' blog.slug %}">
+    <img
+      src="{% static blog.image %}"
+      alt="{{ blog.title }}"
+      class="w-full h-56 object-cover hover:opacity-95 transition-opacity duration-300"
+    />
   </a>
-  <p class="text-gray-600 mt-3 leading-relaxed">{{ blog.excerpt }}</p>
-</article>
+
+  <div class="p-6">
+    <a
+      href="{% url 'blog_detail' blog.slug %}"
+      class="block text-2xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-200"
+    >
+      {{ blog.title }}
+    </a>
+
+    <div class="flex items-center text-sm text-gray-500 mt-2 space-x-2">
+      <span>{{ blog.author }}</span>
+      <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
+      <span>{{ blog.date|date:"F j, Y" }}</span>
+    </div>
+
+    <p class="text-gray-600 mt-3 leading-relaxed">{{ blog.excerpt }}</p>
+
+    {% if show_details %}
+    <p class="mt-4 text-gray-700 text-sm leading-relaxed">{{ blog.content }}</p>
+    {% else %}
+    <div class="mt-5">
+      <a
+        href="{% url 'blog_detail' blog.slug %}"
+        class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+      >
+        Read More →
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</div>

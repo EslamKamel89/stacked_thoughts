@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Dict, List, TypedDict
 
 from django.http import Http404, HttpRequest, HttpResponse
@@ -5,35 +6,60 @@ from django.shortcuts import render
 
 
 class Blog(TypedDict):
-    slug:str
-    title:str
-    image:str
-    excerpt:str
-    content:str
+    slug: str
+    title: str
+    image: str
+    excerpt: str
+    content: str
+    author: str
+    date: datetime
+
 
 BLOGS: List[Blog] = [
     {
         "slug": "first-steps-with-django",
         "title": "First Steps with Django",
-        "image": "blog/images/django-first-steps.jpg",
-        "excerpt": "Getting started with projects, apps, and runserver.",
-        "content": "Full blog content goes here...",
+        "image": "blog/images/django-first-steps.png",
+        "excerpt": "Getting started with projects, apps, and the development server.",
+        "content": (
+            "Starting your first Django project can feel overwhelming, "
+            "but it’s surprisingly smooth once you grasp the core structure. "
+            "In this guide, we’ll create a project, set up an app, and explore "
+            "how Django’s `runserver` command ties everything together for local development."
+        ),
+        "author": "Eslam Kamel",
+        "date": datetime(2025, 11, 1, 10, 30),
     },
     {
         "slug": "template-inheritance-like-a-pro",
         "title": "Template Inheritance Like a Pro",
-        "image": "blog/images/templates.jpg",
+        "image": "blog/images/templates.png",
         "excerpt": "Build maintainable UIs with extends, blocks, and includes.",
-        "content": "Full blog content goes here...",
+        "content": (
+            "Django’s template inheritance is a powerful way to avoid duplication. "
+            "By using `extends` and `block` tags, you can structure your HTML layouts "
+            "so that pages share a consistent look while still allowing per-page customization. "
+            "This pattern makes your templates cleaner and easier to maintain as your project grows."
+        ),
+        "author": "Nadia Youssef",
+        "date": datetime(2025, 11, 2, 14, 45),
     },
     {
         "slug": "static-files-that-scale",
         "title": "Static Files that Scale",
-        "image": "blog/images/static-files.jpg",
-        "excerpt": "Global vs app static, STATICFILES_DIRS, and best practices.",
-        "content": "Full blog content goes here...",
+        "image": "blog/images/static-files.png",
+        "excerpt": "Global vs app static files, configuration tips, and best practices.",
+        "content": (
+            "Managing static files in Django goes beyond placing them in a single folder. "
+            "Understanding the difference between `STATICFILES_DIRS` and app-level `static/` folders "
+            "helps ensure scalability and maintainability. "
+            "We’ll also explore the best practices for deployment using WhiteNoise or cloud storage."
+        ),
+        "author": "Omar Farouk",
+        "date": datetime(2025, 11, 3, 9, 15),
     },
 ]
+
 def get_latest_blogs(n:int = 3) ->List[Blog] :
     return BLOGS[:n]
 
