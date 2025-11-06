@@ -19,7 +19,7 @@ BLOGS: List[Blog] = [
     {
         "slug": "first-steps-with-django",
         "title": "First Steps with Django",
-        "image": "blog/images/django-first-steps.png",
+        "image": "django-first-steps.png",
         "excerpt": "Getting started with projects, apps, and the development server.",
         "content": (
             "Starting your first Django project can feel overwhelming, "
@@ -28,12 +28,12 @@ BLOGS: List[Blog] = [
             "how Django’s `runserver` command ties everything together for local development."
         ),
         "author": "Eslam Kamel",
-        "date": datetime(2025, 11, 1, 10, 30),
+        "date": datetime(2025, 11, 3, 10, 30),
     },
     {
         "slug": "template-inheritance-like-a-pro",
         "title": "Template Inheritance Like a Pro",
-        "image": "blog/images/templates.png",
+        "image": "templates.png",
         "excerpt": "Build maintainable UIs with extends, blocks, and includes.",
         "content": (
             "Django’s template inheritance is a powerful way to avoid duplication. "
@@ -47,7 +47,7 @@ BLOGS: List[Blog] = [
     {
         "slug": "static-files-that-scale",
         "title": "Static Files that Scale",
-        "image": "blog/images/static-files.png",
+        "image": "static-files.png",
         "excerpt": "Global vs app static files, configuration tips, and best practices.",
         "content": (
             "Managing static files in Django goes beyond placing them in a single folder. "
@@ -56,12 +56,13 @@ BLOGS: List[Blog] = [
             "We’ll also explore the best practices for deployment using WhiteNoise or cloud storage."
         ),
         "author": "Omar Farouk",
-        "date": datetime(2025, 11, 3, 9, 15),
+        "date": datetime(2025, 11, 1, 9, 15),
     },
 ]
 
-def get_latest_blogs(n:int = 3) ->List[Blog] :
-    return BLOGS[:n]
+def get_latest_blogs(n:int = 1) ->List[Blog] :
+    sorted_blogs = sorted(BLOGS, key=lambda b:b['date'])
+    return sorted_blogs[-n:]
 
 def find_blog_by_slug(slug:str)->Blog|None:
     for blog in BLOGS :
