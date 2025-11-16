@@ -1,5 +1,9 @@
 
+from typing import Any
+
+from django.core.validators import MinLengthValidator
 from django.db import models
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -27,17 +31,34 @@ class PostManager(models.Manager["Post"]):
 
 
 class Post (BaseModel) :
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=150)
     excerpt = models.TextField(blank=True , null=True)
-    image = models.ImageField(blank=True , null=True)
-    content = models.TextField()
-    author = models.ForeignKey(Author , on_delete=models.CASCADE , related_name='posts')
+    image = models.CharField(blank=True , null=True , max_length=255)
+    content = models.TextField(validators=[
+        MinLengthValidator(10)
+    ])
+    slug = models.SlugField(unique=True , db_index=True)
+    author = models.ForeignKey(Author , on_delete=models.SET_NULL , null=True, related_name='posts')
     tags = models.ManyToManyField("Tag" , through='PostTag' , related_name='posts' , blank=True) # type: ignore
     objects = PostManager()
     plain:models.Manager['Post'] = models.Manager()
 
     def __str__(self)->str :
-        return f"{self.title} <{self.author.first_name} {self.author.last_name}>"
+        author_name = (
+           f" <{self.author.first_name} {self.author.last_name}>"
+           if self.author else ""
+        )
+        return f"{self.title}{author_name}"
+
+    def save(self , *args:Any , **kwargs:Any):
+        if not self.slug and self.title :
+            slug = slugify(self.title)
+            i = 1
+            while Post.objects.filter(slug=slug).exists() :
+                i +=1
+            slug = f"{slug}-{i}"
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     class Meta : # type: ignore
         ordering = ['-created_at']
@@ -45,6 +66,7 @@ class Post (BaseModel) :
 
 class Tag(BaseModel) :
     caption = models.CharField(max_length=50 , unique=True)
+
     def __str__(self)->str :
         return self.caption.capitalize()
 
