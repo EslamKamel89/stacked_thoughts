@@ -1,11 +1,11 @@
 {% extends 'layout.html'%}
 <!-- prettier-ignore -->
-{% block title %} {{ blog.title }} - {{ blog.author }} {% endblock %}
+{% block title %} {{ post.title }} - {{ post.author }} {% endblock %}
 
 {% block content %}
 <div class="min-h-screen bg-gray-50 py-12">
   <div class="max-w-3xl mx-auto px-4">
-    {% include 'blog/includes/blog.html' with show_details=True%}
+    {% include 'blog/includes/post.html' with show_details=True%}
   </div>
 </div>
 {% endblock %}
