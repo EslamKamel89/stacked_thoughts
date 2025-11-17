@@ -37,7 +37,7 @@ class Post (BaseModel) :
     content = models.TextField(validators=[
         MinLengthValidator(10)
     ])
-    slug = models.SlugField(unique=True , db_index=True)
+    slug = models.SlugField(unique=True , db_index=True , blank=True)
     author = models.ForeignKey(Author , on_delete=models.SET_NULL , null=True, related_name='posts')
     tags = models.ManyToManyField(# type: ignore
         "Tag" ,
