@@ -25,7 +25,15 @@
     </div>
 
     <p class="text-gray-600 mt-3 leading-relaxed">{{ post.excerpt }}</p>
-
+    <ul class="flex flex-wrap gap-2 mt-4">
+      {% for tag in post.tags.all %}
+      <li
+        class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-medium"
+      >
+        {{ tag.caption }}
+      </li>
+      {% endfor %}
+    </ul>
     {% if show_details %}
     <p class="mt-4 text-gray-700 text-sm leading-relaxed">
       {{ post.content|linebreaks }}
