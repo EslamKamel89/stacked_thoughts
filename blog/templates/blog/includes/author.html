@@ -1,0 +1,8 @@
+<a
+  href="mailto:{{ post.author.email }}"
+  class="flex items-center text-sm text-gray-500 mt-2 space-x-2"
+>
+  <span>{{ post.author }}</span>
+  <span class="w-1 h-1 bg-gray-400 rounded-full"></span>
+  <span>{{ post.created_at|date:"F j, Y" }}</span>
+</a>
