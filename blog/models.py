@@ -33,7 +33,8 @@ class PostManager(models.Manager["Post"]):
 class Post (BaseModel) :
     title = models.CharField(max_length=150)
     excerpt = models.TextField(blank=True , null=True)
-    image = models.CharField(blank=True , null=True , max_length=255)
+    # image = models.CharField(blank=True , null=True , max_length=255)
+    image = models.ImageField(blank=True , null=True , upload_to='posts')
     content = models.TextField(validators=[
         MinLengthValidator(10)
     ])
