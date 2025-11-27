@@ -4,7 +4,7 @@
 >
   <a href="{% url 'blog_detail' post.slug %}">
     <img
-      src="{% static 'blog/images/'|add:post.image %}"
+      src="{{ post.image.url }}"
       alt="{{ post.title }}"
       class="w-full h-56 object-cover hover:opacity-95 transition-opacity duration-300"
     />

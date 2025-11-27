@@ -1,2 +1,14 @@
 *.sqlite3
 .env
+
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.webp
+*.avif
+*.bmp
+*.tiff
+*.tif
+*.ico
