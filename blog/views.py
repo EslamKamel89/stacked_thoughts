@@ -14,8 +14,9 @@ class StartingPageView(ListView):
     template_name = 'blog/index.html'
     model=Post
     context_object_name = 'posts'
+    ordering = ['-id']
     def get_queryset(self) -> QuerySet[Any]:
-        return super().get_queryset().prefetch_related('tags').order_by('-id')[:1]
+        return super().get_queryset().prefetch_related('tags')[:1]
 
 class BlogsView(ListView):
     template_name = 'blog/all-blogs.html'
