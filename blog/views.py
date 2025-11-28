@@ -4,7 +4,7 @@ from django.db.models.manager import BaseManager
 from django.db.models.query import QuerySet
 from django.http import (Http404, HttpRequest, HttpResponse,
                          HttpResponseRedirect)
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import View
 from django.views.generic.detail import DetailView
@@ -33,7 +33,7 @@ class BlogDetailView(View):
     def get(self , request:HttpRequest , slug:str):
         post = Post.objects.get(slug=slug)
         form = CommentForm()
-        context = {'form':form , 'post':post , 'comments':post.comments.all().order_by('-id')}
+        context = {'form':form , 'post':post , 'comments':post.comments.all().order_by('-id')} # type: ignore
         return render(request , 'blog/post-details.html' , context)
     def post(self , request:HttpRequest , slug:str):
         form = CommentForm(request.POST)
@@ -43,8 +43,14 @@ class BlogDetailView(View):
             comment.post = post
             comment.save()
             return HttpResponseRedirect(reverse('blog_detail' , args=[slug]))
-        context = {'form':form , 'post':post ,'comments':post.comments.all().order_by('-id')}
+        context = {'form':form , 'post':post ,'comments':post.comments.all().order_by('-id')} # type: ignore
         return render(request, 'blog/post-details.html' , context)
+
+
+class ReadLaterView(View):
+    def post(self , request: HttpRequest):
+        post_id = int(request.POST.get('post_id' , '-1'))
+        post = get_object_or_404(Post , pk=post_id)
 
 
 
