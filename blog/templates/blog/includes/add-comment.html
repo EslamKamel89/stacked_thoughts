@@ -1,7 +1,7 @@
 <div
   class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 w-full mx-auto my-4 p-4"
 >
-  <div>Add Comment</div>
+  <h2 class="text-lg font-bold">Leave A Comment</h2>
   <form action="{% url 'blog_detail' post.slug %}" method="POST">
     <!--prettier-ignore-->
     {% csrf_token %}
