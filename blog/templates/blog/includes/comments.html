@@ -2,13 +2,13 @@
   class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 w-full mx-auto my-4 p-4"
 >
   <div>Add Comment</div>
-  <form>
-    {% for field in form %}
+  <form action="{% url 'blog_detail' post.slug %}" method="POST">
     <!--prettier-ignore-->
+    {% csrf_token %}
+    {% for field in form %}
     <div class="form-control {% if field.errors %} text-red-500 {% endif %}">
-      {{ field.label_tag }}
-      {{ field }}
-       <p class="!text-red-500 !text-sm mt-1">{{ field.errors }}</p>
+      {{ field.label_tag }} {{ field }}
+      <p class="!text-red-500 !text-sm mt-1">{{ field.errors }}</p>
     </div>
     {% endfor %}
     <button

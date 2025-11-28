@@ -2,13 +2,16 @@ from typing import Any, Dict
 
 from django.db.models.manager import BaseManager
 from django.db.models.query import QuerySet
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import (Http404, HttpRequest, HttpResponse,
+                         HttpResponseRedirect)
 from django.shortcuts import render
+from django.urls import reverse
+from django.views import View
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from blog.forms import CommentForm
-from blog.models import Post
+from blog.models import Comment, Post
 
 
 class StartingPageView(ListView):
@@ -26,14 +29,24 @@ class BlogsView(ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         return {'posts' : Post.objects.prefetch_related('tags')}
 
-class BlogDetailView(DetailView):
-    template_name = 'blog/post-details.html'
-    model=Post
-    context_object_name = 'post'
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context =  super().get_context_data(**kwargs)
+class BlogDetailView(View):
+    def get(self , request:HttpRequest , slug:str):
+        post = Post.objects.get(slug=slug)
         form = CommentForm()
-        context['form'] = form
-        return context
+        context = {'form':form , 'post':post}
+        return render(request , 'blog/post-details.html' , context)
+    def post(self , request:HttpRequest , slug:str):
+        form = CommentForm(request.POST)
+        post = Post.objects.get(slug=slug)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return HttpResponseRedirect(reverse('blog_detail' , args=[slug]))
+        context = {'form':form , 'post':post}
+        return render(request, 'blog/post-details.html' , context)
+
+
+
 
 
