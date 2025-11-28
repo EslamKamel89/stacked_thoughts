@@ -30,20 +30,28 @@ class BlogsView(ListView):
         return {'posts' : Post.objects.prefetch_related('tags')}
 
 class BlogDetailView(View):
+    def shared_context(self  ,request:HttpRequest , slug:str):
+        post = Post.objects.get(slug=slug)
+        comments = post.comments.all().order_by('-id') # type: ignore
+        stored_posts = request.session.get('stored_posts' , [])
+        is_read_later:bool = post.id in stored_posts # type: ignore
+        return {'post':post , 'comments':comments , 'is_read_later':is_read_later}
+
     def get(self , request:HttpRequest , slug:str):
-        post = Post.objects.get(slug=slug)
+        context = self.shared_context(request , slug)
         form = CommentForm()
-        context = {'form':form , 'post':post , 'comments':post.comments.all().order_by('-id')} # type: ignore
+        context['form'] = form
         return render(request , 'blog/post-details.html' , context)
+
     def post(self , request:HttpRequest , slug:str):
+        context = self.shared_context(request , slug)
         form = CommentForm(request.POST)
-        post = Post.objects.get(slug=slug)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.post = post
+            comment.post = context['post']
             comment.save()
             return HttpResponseRedirect(reverse('blog_detail' , args=[slug]))
-        context = {'form':form , 'post':post ,'comments':post.comments.all().order_by('-id')} # type: ignore
+        context['form'] = form
         return render(request, 'blog/post-details.html' , context)
 
 
@@ -56,6 +64,13 @@ class ReadLaterView(View):
             stored_posts.append(post.id) # type: ignore
             request.session['stored_posts'] = stored_posts
         return HttpResponseRedirect('/')
+    def get(self , request:HttpRequest):
+        stored_posts:list[int] = request.session.get('stored_posts' , [])
+        posts = Post.objects.filter(id__in=stored_posts).prefetch_related('tags')
+        return render(request, 'blog/stored-posts.html' , {"posts" : posts})
+
+
+
 
 
 

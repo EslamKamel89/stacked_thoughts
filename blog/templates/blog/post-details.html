@@ -4,12 +4,12 @@
 
 {% block content %}
 <div class="min-h-screen bg-gray-50 py-12">
-  <div class="max-w-3xl mx-auto px-4 ">
-    {% include 'blog/includes/comment-form-errors.html' with show_details=True%}
-    {% include 'blog/includes/post.html' with show_details=True%}
+  <div class="max-w-3xl mx-auto px-4">
+    <!--prettier-ignore-->
+    {% include 'blog/includes/comment-form-errors.html' with show_details=True %}
+    {% include 'blog/includes/post.html' with show_details=True %}
     {% include 'blog/includes/comments.html' %}
     {% include 'blog/includes/add-comment.html' %}
-    </div>
   </div>
-  {% endblock %}
 </div>
+{% endblock %}

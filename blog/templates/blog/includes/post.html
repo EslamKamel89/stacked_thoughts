@@ -18,8 +18,10 @@
       >
         {{ post.title }}
       </a>
-
+      <!--prettier-ignore-->
+      {% if show_details and not is_read_later %}
       {% include 'blog/includes/read-later-button.html' %}
+      {% endif %}
     </div>
 
     {% include 'blog/includes/author.html'%}
