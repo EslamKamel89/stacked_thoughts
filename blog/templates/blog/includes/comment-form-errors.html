@@ -1,0 +1,13 @@
+{% if form.errors %}
+<div class="space-y-2 my-4 rounded-lg bg-red-100 p-2">
+  <h4 class="text-red-600 text-lg">Sorry we couldn't add your comment</h4>
+  {% for field in form %} {% for error in field.errors %}
+  <div
+    class="flex items-start space-x-2 bg-red-50 text-red-700 border border-red-200 px-4 py-2 rounded-lg text-sm"
+  >
+    <i class="bi bi-exclamation-circle-fill text-red-600 mt-0.5"></i>
+    <span>{{ field.label_tag }} {{ error }}</span>
+  </div>
+  {% endfor %} {% endfor %}
+</div>
+{% endif %}
