@@ -6,7 +6,6 @@
   <div
     class="border-b border-gray-200 pb-4 mb-4 last:mb-0 last:pb-0 last:border-0"
   >
-    <!-- User info -->
     <div class="flex items-center justify-between mb-2">
       <h3 class="text-lg font-semibold text-gray-900">
         {{ comment.user_name }}
@@ -14,10 +13,8 @@
       <span class="text-xs text-gray-500"> {{ comment.created_at }} </span>
     </div>
 
-    <!-- Email -->
     <p class="text-sm text-gray-500 mb-2">{{ comment.user_email }}</p>
 
-    <!-- Comment Content -->
     <p class="text-gray-700 leading-relaxed">{{ comment.content }}</p>
   </div>
 

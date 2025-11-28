@@ -6,9 +6,17 @@
     <!--prettier-ignore-->
     {% csrf_token %}
     {% for field in form %}
-    <div class="form-control {% if field.errors %} text-red-500 {% endif %}">
-      {{ field.label_tag }} {{ field }}
-      <p class="!text-red-500 !text-sm mt-1">{{ field.errors }}</p>
+    <div class="form-control">
+      <!--prettier-ignore-->
+      {{ field.label_tag }}
+      <div
+        class="{% if field.errors %} border-2 rounded-lg border-red-500 {% endif %}"
+      >
+        {{ field }}
+      </div>
+      {% if field.errors %} {% for error in field.errors %}
+      <p class="text-red-500 text-sm">{{ error }}</p>
+      {% endfor %} {% endif %}
     </div>
     {% endfor %}
     <button

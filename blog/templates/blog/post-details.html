@@ -4,7 +4,21 @@
 
 {% block content %}
 <div class="min-h-screen bg-gray-50 py-12">
-  <div class="max-w-3xl mx-auto px-4">
+  <div class="max-w-3xl mx-auto px-4 ">
+    <div class="space-y-2 my-4">
+    {% for field in form %}
+      {% for error in field.errors %}
+        <div
+          class="flex items-start space-x-2 bg-red-50 text-red-700 border border-red-200 px-4 py-2 rounded-lg text-sm"
+        >
+          <i class="bi bi-exclamation-circle-fill text-red-600 mt-0.5"></i>
+          <span>{{ field.label_tag }} {{ error }}</span>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+
+
     {% include 'blog/includes/post.html' with show_details=True%}
     {% include 'blog/includes/comments.html' %}
     {% include 'blog/includes/add-comment.html' %}
