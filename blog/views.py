@@ -33,7 +33,7 @@ class BlogDetailView(View):
     def get(self , request:HttpRequest , slug:str):
         post = Post.objects.get(slug=slug)
         form = CommentForm()
-        context = {'form':form , 'post':post}
+        context = {'form':form , 'post':post , 'comments':post.comments.all().order_by('-id')}
         return render(request , 'blog/post-details.html' , context)
     def post(self , request:HttpRequest , slug:str):
         form = CommentForm(request.POST)
@@ -43,7 +43,7 @@ class BlogDetailView(View):
             comment.post = post
             comment.save()
             return HttpResponseRedirect(reverse('blog_detail' , args=[slug]))
-        context = {'form':form , 'post':post}
+        context = {'form':form , 'post':post ,'comments':post.comments.all().order_by('-id')}
         return render(request, 'blog/post-details.html' , context)
 
 
