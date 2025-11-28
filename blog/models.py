@@ -76,11 +76,8 @@ class Tag(BaseModel) :
     def __str__(self)->str :
         return self.caption.capitalize()
 
-# class PostTag(BaseModel) :
-#     tag = models.ForeignKey(Tag , on_delete=models.CASCADE)
-#     post = models.ForeignKey(Post , on_delete=models.CASCADE)
-
-#     class Meta : # type: ignore
-#         constraints = [
-#             models.UniqueConstraint(fields=['tag' , 'post'] , name='unique_post_tag')
-#         ]
+class Comment(BaseModel):
+    user_name = models.CharField(max_length=120)
+    user_email = models.EmailField()
+    content = models.TextField(max_length=255)
+    post = models.ForeignKey(Post , on_delete=models.CASCADE , related_name='comments')
