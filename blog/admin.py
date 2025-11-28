@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Author, Post, Tag
+from .models import Author, Comment, Post, Tag
 
 
 @admin.register(Author)
@@ -22,3 +22,6 @@ class  PostAdmin(admin.ModelAdmin): # type: ignore
     prepopulated_fields = {'slug':('title',)}
     filter_horizontal = ('tags',)
 
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user_name' , 'user_email' , 'content' , 'post')
