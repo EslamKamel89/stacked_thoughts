@@ -7,17 +7,16 @@ BASE_INPUT_CLASS = "bg-gray-50 border rounded-lg text-heading text-sm focus:ring
 class CommentForm(forms.ModelForm):
     class Meta :
         model=Comment
-        fields = '__all__'
+        fields = ['user_name' , 'user_email' , 'content']
         labels = {
-            'user_name' : 'Name' ,
-            'user_email' :'Email' ,
+            'user_name' : 'Your Name' ,
+            'user_email' :'Your Email' ,
             'content' :"Your comment"
         }
         widgets  = {
             'user_name' : forms.TextInput(attrs={'class':BASE_INPUT_CLASS}),
             'user_email' : forms.TextInput(attrs={'class':BASE_INPUT_CLASS}),
             'content':forms.Textarea(attrs={'class'  : BASE_INPUT_CLASS}) ,
-            'post' : forms.Select(attrs = {'class':BASE_INPUT_CLASS})
         }
 
 
