@@ -11,12 +11,21 @@
   </a>
 
   <div class="p-6">
-    <a
-      href="{% url 'blog_detail' post.slug %}"
-      class="block text-2xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-200"
-    >
-      {{ post.title }}
-    </a>
+    <div class="w-full flex items-center justify-between mb-3">
+      <a
+        href="{% url 'blog_detail' post.slug %}"
+        class="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors duration-200"
+      >
+        {{ post.title }}
+      </a>
+
+      <button
+        class="px-4 py-2 text-sm font-medium rounded-xl border border-gray-300 text-gray-700 bg-white hover:bg-gray-100 active:bg-gray-200 transition flex items-center space-x-2"
+      >
+        <i class="bi bi-bookmark-plus text-gray-600 text-lg"></i>
+        <span>Read later</span>
+      </button>
+    </div>
 
     {% include 'blog/includes/author.html'%}
 
