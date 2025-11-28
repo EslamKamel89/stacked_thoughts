@@ -1,4 +1,4 @@
-<form action="" method="POST">
+<form action="{% url 'blog-read-later' %}" method="POST">
   {% csrf_token %}
   <input type="hidden" name="post_id" value="{{ post.id }}" />
   <button
