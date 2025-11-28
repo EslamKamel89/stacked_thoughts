@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
+from blog.forms import CommentForm
 from blog.models import Post
 
 
@@ -29,5 +30,10 @@ class BlogDetailView(DetailView):
     template_name = 'blog/post-details.html'
     model=Post
     context_object_name = 'post'
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context =  super().get_context_data(**kwargs)
+        form = CommentForm()
+        context['form'] = form
+        return context
 
 
