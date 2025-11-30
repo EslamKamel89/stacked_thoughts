@@ -20,7 +20,7 @@ BLOGS:list[Blog] = [
     {
         "slug": "first-steps-with-django",
         "title": "First Steps with Django",
-        "image": "django-first-steps.png",
+        "image": "posts/django-first-steps.png",
         "excerpt": "Getting started with projects, apps, and the development server.",
         "content": (
             "Starting your first Django project can feel overwhelming, "
@@ -35,7 +35,7 @@ BLOGS:list[Blog] = [
     {
         "slug": "template-inheritance-like-a-pro",
         "title": "Template Inheritance Like a Pro",
-        "image": "templates.png",
+        "image": "posts/templates.png",
         "excerpt": "Build maintainable UIs with extends, blocks, and includes.",
         "content": (
             "Django’s template inheritance is a powerful way to avoid duplication. "
@@ -50,7 +50,7 @@ BLOGS:list[Blog] = [
     {
         "slug": "static-files-that-scale",
         "title": "Static Files that Scale",
-        "image": "static-files.png",
+        "image": "posts/static-files.png",
         "excerpt": "Global vs app static files, configuration tips, and best practices.",
         "content": (
             "Managing static files in Django goes beyond placing them in a single folder. "
